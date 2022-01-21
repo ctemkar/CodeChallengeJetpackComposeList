@@ -3,7 +3,7 @@
     package="com.ctemkar.codechallenge">
 
     <application
-        android:name="com.ctemkar.codechallenge.CodeChallengeApplication"
+        android:name=".CodeChallengeApplication"
         android:fullBackupOnly="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CodeChallenge">
         <activity
-            android:name="com.ctemkar.codechallenge.MainActivity"
+            android:name=".util.TestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.CodeChallenge.NoActionBar">

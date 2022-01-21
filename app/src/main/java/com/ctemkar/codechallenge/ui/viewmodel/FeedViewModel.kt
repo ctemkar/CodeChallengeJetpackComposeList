@@ -15,6 +15,7 @@ import javax.inject.Inject
 class FeedViewModel @Inject constructor(
     private val repository: FeedRepository
 ) : ViewModel() {
+    private val TAG = "FeedViewModel"
 
 
     /*
@@ -37,14 +38,13 @@ class FeedViewModel @Inject constructor(
     //This method loads the data from the repository and loads it to the LiveData
     private fun getFeeds() {
         viewModelScope.launch (Dispatchers.IO){
-            //Calling the suspend function to get all the feilds and set it to livedata
+            //Calling the suspend function to get all the fields and set it to livedata
             //which is being observed from the activity/fragment
             _feeds.postValue(repository.getAllFeeds())
             Log.d(TAG, "getFeeds: ${repository.getAllFeeds().size}")
         }
     }
 
-    private val TAG = "FeedViewModel"
 
 
 }

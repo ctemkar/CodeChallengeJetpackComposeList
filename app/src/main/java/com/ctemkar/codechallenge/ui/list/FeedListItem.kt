@@ -1,6 +1,8 @@
 package com.ctemkar.codechallenge.ui.list
 
+import android.content.Intent
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -8,11 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ctemkar.codechallenge.data.Component
 import com.ctemkar.codechallenge.data.Component1
+import com.ctemkar.codechallenge.util.TestActivity
 import com.ctemkar.codechallenge.util.processComponentType
 
 @Composable
@@ -21,7 +25,7 @@ fun FeedListItem(
 ) {
     //Converting the component to uniform data for views
     val itemDTO = processComponentType(feedComponent)
-
+    val context = LocalContext.current
     //View Definition
     Surface(
         //Setting the background color from item
@@ -39,15 +43,28 @@ fun FeedListItem(
 
 
             Row {
+
                 Text(
                     //Setting the Title from item
-                    modifier = Modifier.weight(8f),
+                    modifier = Modifier.weight(8f)
+                        .selectable(
+                            selected = false,
+                            onClick = {
+                                var intent = Intent(Intent(context,
+                                    TestActivity::class.java))
+                                intent.putExtra("data",itemDTO.title )
+                                context.startActivity(intent)
+
+
+                            }),
                     text = itemDTO.title,
                     color =Color.DarkGray,
                     style = MaterialTheme.typography.h5,
                     fontWeight = FontWeight.Bold,
                     maxLines = 1
+
                 )
+
             }
 
         }
